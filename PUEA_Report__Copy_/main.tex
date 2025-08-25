@@ -1,0 +1,505 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Oliver Lemon made minor edits (jan 2015)  to : 
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 1.43 (17/5/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original authors:
+% Steven Gunn 
+% http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/
+% and
+% Sunil Patel
+% http://www.sunilpatel.co.uk/thesis-template/
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Note:
+% Make sure to edit document variables in the Thesis.cls file
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt, oneside, article]{Thesis} % The default font size and one-sided printing (no margin offsets)
+
+\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+\usepackage{ragged2e}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{unsrtnat}
+\renewcommand{\bibname}{References}
+% --- Hyperref setup ---
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{filecontents}
+\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, arrows.meta}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{datetime}
+\usepackage{multirow}
+
+\titleformat*{\section}{\huge\bfseries}
+\titleformat*{\subsection}{\LARGE\bfseries}
+\titleformat*{\subsubsection}{\Large\bfseries}
+\titleformat*{\paragraph}{\Large\bfseries}
+\titleformat*{\subparagraph}{\large\bfseries}
+
+\title{Detection of Primary User Emulation
+Attack in Cognitive Radio Network:
+Clustering Algorithm} % BUT you should use use " \title{\ttitle} " here instead to define the thesis title ! 
+% \ttitle is defined in the file Thesis.cls 
+
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\usepackage[en-IN]{datetime2}
+
+
+\begin{document}
+% \definecolor{bluegreen}{rgb}{0.0, 0.87, 0.87} % Define bluegreen color
+\usetikzlibrary{shapes.geometric, arrows, positioning, fit}
+
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!10]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!10]
+\tikzstyle{cluster} = [rectangle, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=yellow!20]
+\tikzstyle{parallel} = [rectangle, minimum width=2.5cm, minimum height=1cm, text centered, draw=black, fill=orange!20]
+\tikzstyle{evaluation} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!10]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\setstretch{1.3} % Line spacing of 1.3
+
+% Define the page headers using the FancyHdr package and set up for one-sided printing
+% \fancyhead{} % Clears all page headers and footers
+% \rhead{\thepage} % Sets the right side header to show the page number
+% \lhead{} % Clears the left side page header
+\fancyhf{} % Clear all headers and footers
+
+% Page number on the outer side (right on odd, left on even pages)
+\fancyhead[RO,LE]{\thepage}
+
+% Chapter title on the inner side
+\fancyhead[LO,RE]{\nouppercase{\leftmark}}
+
+
+\pagestyle{fancy} % Finally, use the "fancy" page style to implement the FancyHdr headers
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % New command to make the lines in the title page
+
+% PDF meta-data
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\subjectname}
+\hypersetup{pdfauthor=\authornames}
+\hypersetup{pdfkeywords=\keywordnames}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\vspace{-1cm}
+\begin{center}
+{\scshape\LARGE ASSAM UNIVERSITY \par}\vspace{0cm}
+
+\HRule \\[0.4cm] % Horizontal line
+{\huge \bfseries Detection of Primary User Emulation
+Attack in Cognitive Radio Network: Clustering Algorithm}\\[.1cm] % Thesis title
+\HRule \\[1.5cm] % Horizontal line
+\vspace{-.8cm}
+\large \textit{A report submitted in partial fulfilment of the requirements for the degree of \\ \textbf{\degreename}}\\[0.3cm] % University requirement text
+\vspace{-.4cm}\textit{in }\\ \textbf{Computer Science and Engineering}
+
+ 
+\begin{minipage}[t]{0.8\textwidth}
+\begin{center}
+  \textbf{Submitted By:}\\
+Rishav Raj \\ Reg. No. : 20210020996\hspace{10pt}   of 2021-22\\
+Snehasish Das\\ Reg. No. : 20210000157\hspace{10pt} of 2021-22\\
+Sumir Das \\ Reg. No. : 20220015756\hspace{10pt}   of 2021-22\\
+Debraj Dutta Gupta\\ Reg. No. : 20200014383\hspace{10pt} of 2021-22
+\end{center} \large
+
+
+\end{minipage}
+\\[0.8cm]
+\begin{minipage}[t]{0.8\textwidth}
+\begin{center} \large
+\textbf{Under the Supervision of:} \\
+{\supname}\\
+Assistant Professor, Department of Computer Science and Engineering
+ %\\ Supervisor name - remove the \href bracket to remove the link  
+\end{center}
+\end{minipage}\\[1.5cm]
+ 
+
+{
+\includegraphics[width=3cm]{Logo.png} \\% University/department logo - uncomment to place it
+Triguna Sen School of Tehnology\\ 
+Department of Computer Science and Engineering\\ % Research group name and department name
+Assam University, Silchar 788011 \\
+\large July 12, 2025}\\[1cm]%\today}\\[1cm] % Date
+\end{center}
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%	Your institution may give you a different text to place here
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \includegraphics[width=4cm]{Logo.png} % University/department logo - uncomment to place it
+ 
+
+\end{center}
+\Declaration{
+
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+
+
+We, the undersigned, declare that this report titled 'Detection of Primary User Emulation Attack in Cognitive Radio Network: Clustering Algorithm' and the work presented in this report is our own. We confirm that this work submitted for assessment is our own and is expressed in our own words. Any uses made within it of the works of  other authors in any form (e.g., ideas, equations, figures, text,  tables, programs) are properly acknowledged at any point of their  use . To the best of our knowledge and belief, the same report has not been submitted either by us or by any other person for the award of any other degree or diploma of the University or other
+institute of higher learning.
+
+ \vspace{2cm} 
+\textbf{Rishav Raj (20210020996)}\\
+\rule[1em]{40em}{0.5pt}\\ % This prints a line for the signature
+\textbf{Snehasish Das (20210000157)}\\
+\rule[1em]{40em}{0.5pt}\\
+\textbf{Sumir Das (20220015756)}\\
+\rule[1em]{40em}{0.5pt}\\
+\textbf{Debraj Dutta Gupta (20200014383)}\\
+\rule[1em]{40em}{0.5pt}\\
+Date:\\
+\rule[1em]{20em}{0.5pt}\\ % This prints a line to write the date
+Place:\\
+\rule[1em]{20em}{0.5pt}\\
+}
+
+\clearpage % Start a new page
+
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% CERTIFICATE PAGE
+%
+% Use the \Certificate command to print the Certificate in the document
+%-------------------------------------------------------------------------------
+
+\begin{center}
+\includegraphics[width=3cm]{Logo.png}\\ % University/department logo - uncomment to place it
+Department of Computer Science and Engineering \\
+Assam University, Silchar-788011\\
+\Certificate{
+This is to certify that the report entitled \\ \textit{Detection of Primary User Emulation
+Attack in Cognitive Radio Network:
+Clustering Algorithm}} \\  submitted by \\ \textit{\textbf{Rishav Raj,\\ Snehasish Das,\\ Sumir Das, \\ Debraj Dutta Gupta}} \\ to the Department of Computer Science and Engineering, Assam University, Silchar in partial fulfilment of the requirements for the the award of the Degree of\\ \textbf{Bachelor of Technology} \\ in \\ \textbf{Computer Science and Engineering} \\ is a bonafide record of the work carried out by them under my supervision. It is further certified that the candidates have complied with all the formalities as per the requirements of Assam University.\\ \vspace{2cm}
+
+
+\begin{flushleft}
+ \rule[1em]{30em}{0.5pt}\\  \textbf{Name \& Signature (Supervisor)}  \\ \vspace{1cm}
+ \rule[1em]{30em}{0.5pt}\\ \textbf{Prof. Sudipta Roy (Head of the Department)}  \\ \vspace{1cm}
+\rule[1em]{30em}{0.5pt}\\ \textbf{External Examiner's Name \& Signature}  \\
+\begin{flushright}
+Date and Seal
+\end{flushright}
+\end{flushleft} \large
+
+\end{center}
+\clearpage
+
+
+%-------------  ---------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
+
+\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+We would like to express our sincere gratitude to our Head of Department, \textbf{Dr. Tapodhir Acharjee} from the Department of Computer Science and Engineering and especially to our Project guide, \textbf{Dr. Wangjam Niranjan Singh}, for his invaluable guidance and support throughout this research project. \\ \\
+We express our appreciation to the entire team. Our collaboration and willingness to share
+knowledge and experiences has been invaluable to us.
+Our constructive criticism and input has helped us refine our ideas and clarify our arguments.
+We are truly grateful to have such a supportive academic team.\\
+
+\begin{flushright}
+    
+    Team:-
+    \\Rishav Raj\\Snehasish Das\\Sumir Das\\Debraj Dutta Gupta\\
+\end{flushright}
+}
+\clearpage % Start a new page
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\addtotoc{Abstract} % Add the "Abstract" page entry to the Contents
+
+%\abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+ {\huge{\textit{Abstract}} \par}{\addtocontents{toc}{\vspace{1em}} 
+
+Cognitive Radio Networks (CRNs) have emerged as an intelligent solution to spectrum scarcity; however, they are highly vulnerable to Primary User Emulation Attacks (PUEAs), where malicious users mimic legitimate signals to disrupt communication. Existing detection methods often fail to adapt across diverse network layouts and attack intensities, limiting their effectiveness. This thesis presents an integrated detection framework that combines enhanced clustering techniques (K-means, Spectral, and Agglomerative) with advanced distance-based classification methods (KNN and Means enhancement). A key innovation is the automatic parameter optimization enabling robust adaptability to varying operating conditions, with enhanced variants significantly outperforming baseline implementations. The framework was validated through extensive simulations across 75 network topologies, three distance scenarios (100, 65, and 30 units), and five PUEA penetration levels (10–50\%), with 30 secondary users operating over 400 time slots. Detection was based on Manhattan distance matrices derived from five statistical signal features. Results demonstrate exceptional performance with enhanced K-means variants achieving superior detection: K-means KNN achieved 91.54\% detection rate with 6.84\% false detection, and K-means Means achieved 91.48\% detection rate with 6.83\% false detection, both outperforming the original K-means (91.36\% detection, 6.92\% false detection). Enhanced Spectral KNN achieved 66.02\% detection rate compared to Enhanced Spectral Original's 61.60\%, while Enhanced Agglomerative KNN achieved 62.69\% detection rate surpassing Enhanced Agglomerative Original's 58.27\%. Distance analysis revealed optimal performance in close proximity scenarios (91.54\% detection rate) compared to far distance scenarios (85.43\% detection rate), representing a 6.11 percentage point improvement. These enhanced detection capabilities significantly surpass the 60–75\% detection rates reported in prior literature, establishing enhanced K-means variants as the new benchmark methods for PUEA detection and contributing a scalable, adaptable solution to CRN security.
+}
+
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
+
+\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\tableofcontents % Write out the Table of Contents
+
+\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\listoftables % Write out the List of Tables
+
+\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\listoffigures % Write out the List of Figures
+
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+\setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
+
+\lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
+
+
+\listofsymbols{ll} % Two-column format: Symbol and Description
+{
+\textbf{CRN}  & Cognitive Radio Network \\
+\textbf{PUEA} & Primary User Emulation Attack \\
+\textbf{PU}   & Primary User \\
+\textbf{SU}   & Secondary User \\
+\textbf{ML}   & Machine Learning \\
+\textbf{DSA}  & Dynamic Spectrum Access \\
+\textbf{SNR}  & Signal-to-Noise Ratio \\
+\textbf{ROC}  & Receiver Operating Characteristic \\
+\textbf{AUC}  & Area Under Curve \\
+\textbf{ARI}  & Adjusted Rand Index \\
+\textbf{KNN}  & K-Nearest Neighbors \\
+\textbf{CSV}  & Comma-Separated Values \\
+\textbf{RSS}  & Received Signal Strength \\
+\textbf{AWGN} & Additive White Gaussian Noise \\
+}
+
+
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%\clearpage % Start a new page
+
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+\lhead{\emph{Symbols}} % Set the left side page header to "Symbols"
+
+
+\addcontentsline{toc}{chapter}{List of Symbols}
+\lhead{\emph{List of Symbols}} % Optional header
+
+\listofnomenclature{lll} % Symbol, Description, Unit
+{
+$P_d$ & Probability of detection & -- \\
+$P_f$ & Probability of false alarm & -- \\
+$\gamma$ & Received signal power & $dBm$ \\
+$\sigma^2$ & Noise variance & dB \\
+$\lambda$ & Decision threshold & dB \\
+$d_{ij}$ & Distance between points $i$ and $j$ & Units \\
+$\sigma$ & Spectral clustering affinity (RBF) kernel width & Units \\
+$k$ & Number of clusters & -- \\
+$\vect{x}$ & Feature vector & -- \\
+$\mat{D}$ & Distance matrix & -- \\
+$N$ & Number of data points & -- \\
+$\mu$ & Cluster centroid & -- \\
+
+}
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+% \setstretch{1.3} % Return the line spacing back to 1.3
+
+% \pagestyle{empty} % Page style needs to be empty for this page
+
+% % \dedicatory{For/Dedicated to/To my\ldots} % Dedication text
+
+% \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{fancy} % Return the page headers back to the "fancy" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2} 
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4} 
+\input{Chapters/Chapter5} 
+\input{Chapters/Chapter6} 
+%\input{Chapters/Chapter7} 
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+\input{Appendices/AppendixA}
+%\input{Appendices/AppendixB}
+%\input{Appendices/AppendixC}
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\backmatter
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+
+\label{References}
+
+\lhead{\emph{References}} % Change the page header to say "Bibliography"
+
+% References
+\begin{thebibliography}{25}
+
+\bibitem{ref1}
+I. Gupta and O. P. Sahu, ``An Overview of Primary User Emulation Attack in Cognitive Radio Networks,'' \emph{2018 Second International Conference on Computing Methodologies and Communication (ICCMC)}, Erode, India, 2018, pp. 27--31, doi: 10.1109/ICCMC.2018.8487476.
+
+\bibitem{ref2}
+D. M. Alias and Ragesh G. K, ``Cognitive Radio networks: A survey,'' \emph{2016 International Conference on Wireless Communications, Signal Processing and Networking (WiSPNET)}, Chennai, India, 2016, pp. 1981--1986, doi: 10.1109/WiSPNET.2016.7566489.
+
+\bibitem{ref3}
+I. F. Akyildiz, W. Y. Lee, M. C. Vuran, and S. Mohanty, ``Next generation/dynamic spectrum access/cognitive radio wireless networks: A survey,'' \emph{Computer Networks}, vol. 50, no. 13, pp. 2127--2159, 2006.
+
+\bibitem{ref4}
+R. Chen, J.-M. Park, and J. H. Reed, ``Defense against primary user emulation attacks in cognitive radio networks,'' \emph{IEEE Journal on Selected Areas in Communications}, vol. 26, no. 1, pp. 25--37, 2008.
+
+\bibitem{ref5}
+Y. Liu, P. Ning, and H. Dai, ``Authenticating primary users' signals in cognitive radio networks via integrated cryptographic and wireless link signatures,'' \emph{IEEE Symposium on Security and Privacy}, pp. 286--301, 2010.
+
+\bibitem{ref6}
+Z. Jin, S. Anand, and K. P. Subbalakshmi, ``Detecting primary user emulation attacks in dynamic spectrum access networks,'' \emph{IEEE International Conference on Communications}, pp. 1--5, 2010.
+
+\bibitem{ref7}
+B. Naqvi, I. Rashid, F. Riaz and B. Aslam, ``Primary User Emulation attack and their mitigation strategies: A survey,'' \emph{2013 2nd National Conference on Information Assurance (NCIA)}, Rawalpindi, Pakistan, 2013, pp. 95--100, doi: 10.1109/NCIA.2013.6725331.
+
+\bibitem{ref8}
+L. Huang, L. Xie, H. Yu, W. Wang, and Y. Liu, ``Robust collaborative spectrum sensing in the presence of primary user emulation attacks,'' \emph{IEEE Transactions on Communications}, vol. 61, no. 8, pp. 3566--3578, 2013.
+
+\bibitem{ref9}
+Y. Wang, Z. Li, P. Zhang, and B. Zhang, ``Primary user emulation attack detection in cognitive radio using machine learning techniques,'' \emph{IEEE Access}, vol. 6, pp. 73595--73605, 2018.
+
+\bibitem{ref10}
+W. Kim, H. Jang, and D. Hong, ``Robust detection of false data injection attacks in smart grids using deep learning,'' \emph{IEEE Access}, vol. 6, pp. 58688--58698, 2018.
+
+\bibitem{ref11}
+D. Lafia, M. L. Sanni, and R. A. Adetona, “Signal Processing-based Model for Primary User Emulation Attacks Detection in Cognitive Radio Networks” in CIT. Journal of Computing and Information Technology, vol. 29, no. 2, pp. 77–88, 2021, doi: 10.20532/cit.2021.1005297 
+
+\bibitem{ref12}
+H. Thakkar and S. Goswami, "The Cluster-based Cognitive Radio Sensor Networks that are Wireless Aware of PUEA and SSDF Attacks," \textit{2023 (ICAISC), Dharwad, India}, 2023, pp. 1-7, doi: 10.1109/ICAISC58445.2023.10199174.
+
+\bibitem{ref13}
+B. Luo, L. Li, and Q. Li, ``A novel clustering-based feature extraction method for PUEA detection,'' \emph{IEEE Communications Letters}, vol. 23, no. 10, pp. 1722--1726, 2019.
+
+\bibitem{ref14}
+Wangjam Niranjan Singh, Ningrinla Marchang, Amar Taggu, ``Mitigating SSDF Attack using Distance-based Outlier approach in Cognitive Radio Networks,'' \emph{International Journal of Ad Hoc and Ubiquitous Computing}, vol. 1, no. 1, pp. 1, Jan. 2018, doi: 10.1504/IJAHUC.2018.10015628.
+
+\bibitem{ref15}
+Z. Jin, S. Anand, and K. P. Subbalakshmi, ``Detecting primary user emulation attacks dynamic spectrum access networks,'' \emph{IEEE International Conference on Communications (ICC'2009)}, pp. 1--3, doi: 10.1109/icc.2009.5198911.
+
+\bibitem{ref16}
+S. Anand, Z. Jin and K. P. Subbalakshmi, ``An Analytical Model for Primary User Emulation Attacks in Cognitive Radio Networks,'' \emph{3rd IEEE Symposium on New Frontiers in Dynamic Spectrum Access Networks}, USA, 2008, pp. 1--6, doi: 10.1109/DYSPAN.2008.16.
+
+\bibitem{ref17}
+Zesheng Chen, T. Cooklev, Chao Chen and C. Pomalaza-R\'aez, ``Modeling primary user emulation attacks and defenses in cognitive radio networks,'' \emph{IEEE 28th International Performance Computing and Communications Conference}, 2009, pp. 209--214, doi: 10.1109/PCCC.2009.5403815.
+
+\bibitem{ref18}
+M. Ester, H.-P. Kriegel, J. Sander, and X. Xu, ``A density-based algorithm for discovering clusters in large spatial databases with noise,'' in \emph{Proc. 2nd Int. Conf. Knowledge Discovery and Data Mining}, 1996, pp. 226--231.
+
+\bibitem{ref19}Arun, S., Umamaheswari, G. "An Adaptive Learning-Based Attack Detection Technique for Mitigating Primary User Emulation in Cognitive Radio Networks". \emph{Circuits Syst Signal Process} 39, 1071–1088 (2020).
+
+\bibitem{ref20}
+G. Olaleru, H. Ohize, A. S. Mohammed and U. S. Dauda, "Optimal Detection Technique for Primary User Emulator in Cognitive Radio Network," 2021 1st International Conference on Multidisciplinary Engineering and Applied Science (ICMEAS), Abuja, Nigeria, 2021, pp. 1-6, doi: 10.1109/ICMEAS52683.2021.9739814.
+
+\bibitem{ref21}
+A. Taggu and N. Marchang, ``A Density-based Clustering Approach to detect Colluding SSDF Attackers in Cognitive Radio Networks,'' \emph{2022 37th International Technical Conference on Circuits/Systems, Computers and Communications (ITC-CSCC)}, Phuket, Thailand, 2022, pp. 709--712, doi: 10.1109/ITC-CSCC55581.2022.9895018.
+
+\bibitem{ref22}
+Y. Zhao, ``A reliable spectrum sensing method based on deep learning for primary user emulation attack detection in cognitive radio network,'' \emph{Neural Computing and Applications}, vol. 33, no. 18, pp. 11689--11701, Sept. 2021.
+
+\bibitem{ref23}
+B. Chhetry and N. Marchang, ``Detection of PUEA in CRNs using one-class classification,'' \emph{Wireless Personal Communications}, vol. 119, no. 3, pp. 2651--2671, June 2021.
+
+\bibitem{ref24}
+N. Mishra, S. Srivastava, and S. N. Sharan, ``Countermeasures for primary user emulation attack: A comprehensive review,'' \emph{Computer Networks}, vol. 185, 107647, Feb. 2021.
+
+\bibitem{ref25}
+S. Parvin, F. K. Hussain, O. K. Hussain, S. Han, B. Tian, and E. Chang, ``Cognitive radio network security: A survey,'' \emph{Computer Communications}, vol. 35, no. 13, pp. 1590--1607, July 2012.
+
+\bibitem{ref26}
+{\href {https://www.ericsson.com/en/reports-and-papers/mobility-report/dataforecasts/mobile-traffic-update}{https://www.ericsson.com/en/reports-and-papers/mobility-report/dataforecasts/mobile-traffic-update}}
+
+
+\bibitem{ref27}
+{\href {https://www.sciencedirect.com/science/article/pii/S1084804515002295}{https://www.sciencedirect.com/science/article/pii/S1084804515002295}}
+
+\bibitem{ref28}
+{\href
+{https://networksimulationtools.com/cognitive-radio-ad-hoc-network-projects/}
+{Cognitive Radio Ad hoc Network Projects (https://networksimulationtools.com/cognitive-radio-ad-hoc-network-projects/)}
+}
+
+\bibitem{ref29}
+{\href
+{https://www.tu-chemnitz.de/etit/dst/forschung/com_sys/cognitive_radio.php.en}
+{Cognitive Radio Cycle$(www.tu-chemnitz.de/etit/dst/forschung/com_sys/cognitive_radio.php.en)$}
+}
+
+\end{thebibliography}
+
+\end{document}

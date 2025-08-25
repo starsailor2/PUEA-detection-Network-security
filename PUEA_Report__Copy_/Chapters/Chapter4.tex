@@ -1,0 +1,412 @@
+\chapter{Methodology}
+\label{C\begin{table}[h]
+\centering
+\\begin{table}[h]
+\centering
+\caption{Distance Scenario Configurations}
+\label{tab:scenarios}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Scenario} & \textbf{PU-PUEA Distance} & \textbf{Detection Challenges} \\
+\hline
+A (Far) & 100 units & Signal attenuation effects \\
+B (Medium) & 65 units & Moderate power requirements \\
+C (Close) & 30 units & High signal similarity \\
+\hline
+\end{tabular}
+\end{table} Configuration Parameters}
+\label{tab:system_config}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+Network Topologies & 75 \\
+Secondary Users per Topology & 30  \\
+Geographical Area & 150×150 units \\
+Time Slots per Scenario & 400  \\
+\hline
+\end{tabular}
+\end{table}d{Chapter 4. \emph{Methodology}} 
+
+This chapter presents the comprehensive methodology for Primary User Emulation Attack (PUEA) detection in Cognitive Radio Networks, implementing an integrated multi-topology evaluation framework with advanced machine learning clustering techniques and distance-based classification enhancement algorithms. The methodology encompasses experimental framework design, network topology generation, signal propagation modeling, statistical feature extraction, enhanced clustering algorithms, classification refinement techniques, and performance evaluation protocols. The systematic approach evaluates detection performance across 75 distinct network topologies establish robust statistical foundations for PUEA detection capability assessment.
+
+The experimental framework establishes a comprehensive evaluation structure designed to assess Primary User Emulation Attack detection performance across diverse network configurations and attack scenarios. The integrated multi-topology PUEA detection system implements a hierarchical evaluation approach that systematically varies network parameters, spatial configurations, attack penetration levels, clustering methods, and classification techniques to provide thorough performance characterization.
+
+The experimental design implements a hierarchical structure of five levels as shown in Table \ref{tab:hierarchy} that allows systematic evaluation in multiple dimensions of the network configuration and algorithmic parameters. This hierarchical approach ensures comprehensive coverage of realistic deployment scenarios while maintaining statistical rigor and computational feasibility.
+ 
+\begin{table}[h]
+\centering
+\caption{Hierarchical Evaluation Structure Parameters}
+\label{tab:hierarchy}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Level} & \textbf{Parameter} & \textbf{Values/Range} \\
+\hline
+Level 1 & Network Topologies & 75 distinct configurations \\
+Level 2 & Distance Scenarios & A (100 units), B (65 units), C (30 units) \\
+Level 3 & PUEA Penetration & 10\%, 20\%, 30\%, 40\%, 50\% \\
+Level 4 & Clustering Methods & K-means, Spectral, Agglomerative \\
+Level 5 & Classification Enhancement & Original, KNN (R=5), Means-based \\
+\hline
+\textbf{Total Combinations} & \multicolumn{2}{|l|}{3,375 unique parameter sets} \\
+\hline
+\end{tabular}
+\end{table}
+
+The system configuration establishes standardized parameters that ensure consistent experimental conditions while enabling meaningful comparative analysis across different algorithmic approaches as shown in Table \ref{tab:system_config}
+
+\begin{table}[h]
+\centering
+\caption{System Configuration Parameters}
+\label{tab:system_config}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+Network Topologies & 75 \\
+Secondary Users per Topology & 30  \\
+Geographical Area & 150×150 units \\
+Time Slots per Scenario & 400  \\
+\hline
+\end{tabular}
+\end{table}
+
+Three distinct distance scenarios are implemented to represent different geographical attack configurations commonly encountered in cognitive radio deployments. Each scenario reflects specific operational characteristics and spatial relationships between primary users, adversarial entities, and secondary user networks as shown in Table \ref{tab:scenarios}
+
+\begin{table}[h]
+\centering
+\caption{Distance Scenario Configurations}
+\label{tab:scenarios}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Scenario} & \textbf{PU-PUEA Distance} & \textbf{Detection Challenges} \\
+\hline
+A (Far) & 100 units & Signal attenuation effects \\
+B (Medium) & 65 units & Moderate power requirements \\
+C (Close) & 30 units & High signal similarity \\
+\hline
+\end{tabular}
+\end{table}
+
+The topology generation algorithm creates diverse network configurations through systematic parameter variation while ensuring reproducible results through controlled random number generation. The mathematical framework enables precise positioning of network entities within the standardized geographical area while maintaining realistic spatial relationships.
+
+The signal propagation model implements a comprehensive framework that accurately represents wireless channel characteristics in cognitive radio environments. The model incorporates both deterministic path loss components and stochastic shadowing effects to provide realistic signal propagation modeling across diverse environmental conditions and spatial configurations.
+
+The received power calculation follows an enhanced path loss equation that combines distance-dependent attenuation with stochastic channel variations:
+
+\begin{equation}
+P_r = P_t r^{-\alpha} e^{a\beta}
+\end{equation}
+
+where:
+\begin{itemize}
+\item $P_t$: Transmit power in linear scale
+\item $P_r$: Received power in linear scale
+\item $r$: Distance between transmitter and receiver in units
+\item $\alpha$: Path loss exponent reflecting environmental characteristics
+\item $a$: Scaling factor for stochastic effects
+\item $\beta$: Random variable representing shadowing and fading effects
+\end{itemize}
+
+The power law distance dependence with exponential stochastic component accurately models signal attenuation in wireless environments while the multiplicative exponential term accounts for environmental variations and multi-path propagation effects commonly observed in cognitive radio deployments.
+
+The channel model incorporates realistic parameter distributions based on empirical wireless propagation studies and cognitive radio deployment scenarios. Each parameter follows carefully selected probability distributions that reflect observed variations in realistic operating environments as shown in Table \ref{tab:channel_params}
+
+\begin{table}[h]
+\centering
+\caption{Channel Model Parameters}
+\label{tab:channel_params}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Distribution} & \textbf{Range} & \textbf{Physical Interpretation} \\
+\hline
+Path Loss Exponent ($\alpha$) & Uniform & [2, 6] & Free space to dense urban \\
+Shadowing ($S$) & Uniform & [4, 12] dB & Environmental variations \\
+PU Transmit Power & Constant & 15 dB & Baseline reference signal \\
+PUEA Transmit Power & Uniform & [25, 35] dB & High-power attack signals \\
+\hline
+\end{tabular}
+\end{table}
+
+The time slot-based simulation incorporates 400 time slots per scenario to enable modeling of temporal channel variations while maintaining statistical consistency for performance evaluation. Each time slot represents an independent channel realization with randomly generated path loss exponent, shadowing values, and PUEA transmit power according to the specified distributions.
+
+The feature extraction process transforms received power measurements into statistical descriptors that characterize signal propagation patterns and enable effective clustering analysis for PUEA detection. The comprehensive approach extracts five statistical features from received power measurements across 30 secondary user locations, providing sufficient dimensionality for meaningful clustering while maintaining computational efficiency.
+
+The statistical feature extraction framework implements mathematically rigorous descriptors that capture different aspects of received power distributions across secondary user networks. Each feature provides unique information about signal propagation characteristics that distinguish between legitimate primary user transmissions and adversarial PUEA signals as shown in Table \ref{tab:features}.
+
+\begin{table}[h]
+\centering
+\caption{Statistical Features and Their Properties}
+\label{tab:features}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Feature} & \textbf{Mathematical Form} \\
+\hline
+$F_1$ (Mean) & $\frac{1}{N}\sum P_i$  \\
+$F_2$ (Variance) & $\frac{1}{N}\sum (P_i - F_1)^2$  \\
+$F_3$ (Median) & 50th percentile \\
+$F_4$ (Q1) & 25th percentile  \\
+$F_5$ (Q3) & 75th percentile \\
+\hline
+\end{tabular}
+\end{table}
+
+The dataset construction process implements systematic procedures for creating training and evaluation datasets with different PUEA penetration levels (10\%, 20\%, 30\%, 40\%, 50\%). Each penetration level represents the proportion of time slots containing PUEA transmissions relative to legitimate primary user transmissions, enabling assessment of detection performance under varying attack intensity conditions as shown in Table \ref{tab:penetration}
+
+\begin{table}[h]
+\centering
+\caption{PUEA Penetration Level Configuration}
+\label{tab:penetration}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Penetration Level} & \textbf{PUEA Samples} & \textbf{PU Samples} & \textbf{Total Samples} \\
+\hline
+10\% & 40 & 360 & 400 \\
+20\% & 80 & 320 & 400 \\
+30\% & 120 & 280 & 400 \\
+40\% & 160 & 240 & 400 \\
+50\% & 200 & 200 & 400 \\
+\hline
+\end{tabular}
+\end{table}
+
+The Manhattan distance matrix calculation implements the $L_1$ norm across the five-dimensional statistical feature space:
+
+\begin{equation}
+d_{Manhattan}(x_i, x_j) = \sum_{k=1}^{5} |x_{i,k} - x_{j,k}|
+\end{equation}
+
+where $x_{i,k}$ represents the $k$-th feature of sample $i$ across the five extracted statistical features (mean, variance, median, Q1, Q3).
+
+The selection of Manhattan distance over Euclidean alternatives is based on empirical performance analysis and theoretical considerations relevant to statistical feature clustering. Manhattan distance demonstrates superior robustness to outliers in the five-dimensional feature space while providing computational efficiency with O(n²) complexity scaling for distance matrix construction.
+
+\section{Proposed Clustering Method for PUEA Detection}
+
+The enhanced clustering framework implements three advanced algorithms with systematic parameter optimization and validation strategies to improve PUEA detection performance beyond baseline implementations. Each algorithm incorporates specific enhancements designed to address challenges in wireless signal classification and improve robustness to parameter variations.
+
+The enhanced K-means clustering algorithm incorporates multiple improvements over standard implementations, including feature standardization, multiple random initializations, and inertia-based model selection for robust cluster identification.
+
+\textbf{Feature Standardization Implementation:}
+Feature standardization employs StandardScaler with zero mean and unit variance normalization to ensure equal feature contribution to distance calculations:
+
+\begin{equation}
+X_{standardized} = \frac{X - \mu_X}{\sigma_X}
+\end{equation}
+
+where $\mu_X$ and $\sigma_X$ represent feature-wise means and standard deviations across all samples.
+
+\begin{algorithm}
+\caption{Enhanced K-means Implementation}
+\begin{algorithmic}[1]
+\REQUIRE Features matrix $X$, number of clusters $k=2$
+\STATE $scaler \leftarrow StandardScaler()$
+\STATE $X_{scaled} \leftarrow scaler.fit\_transform(X)$
+\STATE $best\_inertia \leftarrow \infty$
+\STATE $best\_labels \leftarrow None$
+\FOR{$seed$ in $range(5)$}
+    \STATE $kmeans \leftarrow KMeans(n\_clusters=2, random\_state=seed, n\_init=10)$
+    \STATE $labels \leftarrow kmeans.fit\_predict(X_{scaled})$
+    \IF{$len(unique(labels)) = 2$ AND $kmeans.inertia < best\_inertia$}
+        \STATE $best\_inertia \leftarrow kmeans.inertia$
+        \STATE $best\_labels \leftarrow labels$
+    \ENDIF
+\ENDFOR
+\RETURN $best\_labels$
+\end{algorithmic}
+\end{algorithm}
+
+
+The enhanced spectral clustering algorithm implements data-driven parameter optimization through multiple sigma calculation strategies and balanced cluster validation to improve performance across diverse feature distributions as shown in Algorithm~\ref{alg:spectral_clustering}.
+
+
+\begin{algorithm}
+\caption{Spectral Clustering}
+\label{alg:spectral_clustering}
+\begin{algorithmic}[1]
+\REQUIRE Feature vectors $\{F_1, F_2, \ldots, F_m\}$, number of clusters $K$
+\ENSURE Cluster assignments $\{c_1, c_2, \ldots, c_m\}$
+\STATE Compute the similarity matrix $S$ where $S_{ij}$ measures similarity between $F_i$ and $F_j$
+\STATE Construct the degree matrix $D$ where $D_{ii} = \sum_{j} S_{ij}$
+\STATE Compute the unnormalized Laplacian matrix $L = D - S$
+\STATE Compute the first $K$ eigenvectors of $L$ to form matrix $U \in \mathbb{R}^{m \times K}$
+\STATE Normalize each row of $U$ to have unit length (optional, for normalized spectral clustering)
+\STATE Apply K-means clustering to the rows of $U$ to obtain cluster assignments
+\STATE \RETURN Cluster assignments $\{c_1, c_2, \ldots, c_m\}$
+\end{algorithmic}
+\end{algorithm}
+
+The enhanced agglomerative clustering algorithm implements linkage preference optimization with balance threshold enforcement and robust fallback strategies for improved clustering reliability across diverse distance matrix characteristics as shown in Algorithm~\ref{alg:En_Agglo_cluster_algo}.
+
+
+\begin{algorithm}
+\caption{Enhanced Agglomerative Clustering}
+\label{alg:En_Agglo_cluster_algo}
+\begin{algorithmic}[1]
+\REQUIRE Distance matrix $D$
+\STATE $best\_balance \leftarrow 0$
+\STATE $best\_labels \leftarrow None$
+\STATE $linkage\_methods \leftarrow [average, complete, single]$
+\STATE $linkage\_bonus \leftarrow \{average: 0.2, complete: 0.1, single: 0.0\}$
+\FOR{$linkage$ in $linkage\_methods$}
+    \STATE $agg \leftarrow AgglomerativeClustering(n\_clusters=2, linkage=linkage, metric=precomputed)$
+    \STATE $labels \leftarrow agg.fit\_predict(D)$
+    \STATE $counts \leftarrow count\_unique(labels)$
+    \STATE $balance \leftarrow \min(counts) / \max(counts)$
+    \STATE $score \leftarrow balance + linkage\_bonus[linkage]$
+    \IF{$balance \geq 0.15$ AND $score > best\_balance$}
+        \STATE $best\_balance \leftarrow score$
+        \STATE $best\_labels \leftarrow labels.copy()$
+    \ENDIF
+\ENDFOR
+\RETURN $best\_labels$
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{Proposed Enhanced Clustering Method for PUEA
+Detection}
+
+The classification enhancement framework implements two sophisticated algorithms designed to refine clustering results and improve PUEA detection accuracy through distance-based classification techniques. These algorithms address limitations of standard clustering approaches by incorporating neighborhood analysis and distance-based refinement strategies.
+
+
+The cluster identification process employs a size-based heuristic for distinguishing between PU and PUEA clusters based on realistic attack scenario assumptions. This approach leverages the typical operational characteristic that primary user samples outnumber PUEA samples in most cognitive radio deployment scenariosas shown in Algorithm~\ref{alg:Cluster_identifi}.
+
+\textbf{Size-based Cluster Assignment:}
+\begin{algorithm}
+\caption{Cluster Identification}
+\label{alg:Cluster_identifi}
+\begin{algorithmic}[1]
+\REQUIRE Cluster labels $L$, unique clusters $\{C_0, C_1\}$
+\STATE $count_0 \leftarrow \sum(L = C_0)$
+\STATE $count_1 \leftarrow \sum(L = C_1)$
+\IF{$count_0 > count_1$}
+    \STATE $PU\_cluster \leftarrow C_0$, $PUEA\_cluster \leftarrow C_1$
+\ELSE
+    \STATE $PU\_cluster \leftarrow C_1$, $PUEA\_cluster \leftarrow C_0$
+\ENDIF
+\RETURN $PU\_cluster$, $PUEA\_cluster$
+\end{algorithmic}
+\end{algorithm}
+
+This heuristic is justified based on the assumption that PUEA penetration levels (10-50\%) result in minority cluster assignment to PUEA samples, making the larger cluster likely to represent legitimate primary user transmissions.
+
+The KNN-based enhancement algorithm implements neighborhood analysis using R=5 nearest neighbors to refine clustering decisions through local density analysis. This approach identifies potential misclassifications by examining the neighborhood composition around each candidate point as shown in Algorithm~\ref{alg:knn_en_algo}.
+
+\textbf{Neighbor Identification Process:}
+For each candidate point $i$ in the candidate set, the algorithm identifies 5 nearest neighbors based on Manhattan distance matrix ordering:
+
+\begin{equation}
+N_R(i) = \{j : j \text{ among } R \text{ nearest neighbors of } i \text{ based on } d_{ij}\}
+\end{equation}
+
+\textbf{Classification Decision Framework:}
+The classification decision counts neighbors in candidate set (cCand) versus normal set (cNormal) with PUEA classification when cCand > cNormal:
+
+\begin{algorithm}
+\caption{KNN Enhancement Algorithm}
+\label{alg:knn_en_algo}
+\begin{algorithmic}[1]
+\REQUIRE Distance matrix $D$, candidate set $CandSet$, R=5
+\STATE $outliers \leftarrow []$
+\FOR{$i$ in $CandSet$}
+    \STATE $distances\_with\_indices \leftarrow [(D[i][j], j)$ for $j \neq i]$
+    \STATE Sort $distances\_with\_indices$ by distance
+    \STATE $cCand \leftarrow 0$, $cNormal \leftarrow 0$
+    \FOR{$j$ in first $\min(R, |distances\_with\_indices|)$ entries}
+        \STATE $neighbor\_idx \leftarrow distances\_with\_indices[j][1]$
+        \IF{$neighbor\_idx$ in $CandSet$}
+            \STATE $cCand \leftarrow cCand + 1$
+        \ELSE
+            \STATE $cNormal \leftarrow cNormal + 1$
+        \ENDIF
+    \ENDFOR
+    \IF{$cCand > cNormal$}
+        \STATE $outliers.append(i)$
+    \ENDIF
+\ENDFOR
+\RETURN $outliers$
+\end{algorithmic}
+\end{algorithm}
+
+The means-based enhancement algorithm implements distance-based refinement through iterative evaluation of point assignments based on distance sum minimization as shown in Algorithm ~\ref{alg:means_enhancement}. This approach refines cluster assignments by comparing individual point distances to cluster centroids.
+
+\textbf{Distance Sum Calculation:}
+The algorithm computes total distance sums for candidate and normal sets:
+
+\begin{align}
+CandDist[i] &= \sum_{j=1}^{n} d_{ij} \text{ for } i \in CandSet \\
+TotalCandDist &= \sum_{i \in CandSet} CandDist[i]
+\end{align}
+
+\textbf{Iterative Refinement Process:}
+Point-by-point evaluation based on distance difference minimization:
+
+\begin{algorithm}
+\caption{Means-based Enhancement Algorithm}
+\label{alg:means_enhancement}
+\begin{algorithmic}[1]
+\REQUIRE Distance matrix $D$, candidate set $CandSet$
+\STATE Compute $CandDist$ and $NormDist$ for all points
+\STATE $refined\_CandSet \leftarrow CandSet.copy()$
+\STATE $refined\_NormalSet \leftarrow NormalSet.copy()$
+\REPEAT
+    \STATE $changes \leftarrow 0$
+    \FOR{$i$ in $refined\_CandSet$}
+        \STATE $CandDistMeans \leftarrow current\_TotalCandDist / |refined\_CandSet|$
+        \STATE $NormDistMeans \leftarrow current\_TotalNormDist / |refined\_NormalSet|$
+        \STATE $cand\_diff \leftarrow |CandDistMeans - CandDist[i]|$
+        \STATE $norm\_diff \leftarrow |NormDistMeans - NormDist[i]|$
+        \IF{$cand\_diff > norm\_diff$}
+            \STATE Move $i$ from candidate to normal set
+            \STATE $changes \leftarrow changes + 1$
+        \ENDIF
+    \ENDFOR
+\UNTIL{$changes = 0$}
+\RETURN $refined\_CandSet$
+\end{algorithmic}
+\end{algorithm}
+
+
+The performance evaluation framework implements comprehensive metrics calculation and statistical analysis procedures to assess PUEA detection effectiveness across all experimental conditions. The framework incorporates detection rate and false detection rate calculations with robust statistical validation procedures.
+
+
+The performance evaluation employs two primary metrics that characterize detection system effectiveness from complementary perspectives:
+
+\textbf{Detection Rate (DR):} Proportion of correctly identified PUEA samples representing system sensitivity:
+
+\begin{equation}
+DR = \frac{\text{Correctly detected PUEA}}{\text{Total No. of PU}}
+\end{equation}
+
+\textbf{False Detection Rate (FDR):} Proportion of PU samples incorrectly classified as PUEA representing system specificity:
+
+\begin{equation}
+FDR = \frac{\text{No. of PU falsely detected as PUEA}}{\text{Total No. of PU}} 
+\end{equation}
+
+The complete evaluation pipeline processes unique parameter combinations, generating comprehensive performance characterization across all experimental dimensions as shown in \ref{tab:eval_pipeline}
+
+The evaluation framework implements intermediate result saving mechanisms every 10 topologies to ensure progress preservation and enable memory management during extended computational experiments. This approach prevents data loss while providing checkpoint capabilities for experiment monitoring and debugging.
+
+\begin{table}[h]
+\centering
+\caption{Evaluation Pipeline Computational Requirements}
+\label{tab:eval_pipeline}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Component} & \textbf{Quantity} & \textbf{Total Operations} \\
+\hline
+Network Topologies & 75 & Base configurations \\
+Distance Scenarios & 3 per topology & 225 scenario evaluations \\
+Penetration Levels & 5 per scenario & 1,125 penetration cases \\
+Clustering Methods & 3 per case & 3,375 clustering operations \\
+Enhancement Methods & 3 per clustering & 10,125 enhancement operations \\
+Performance Measurements & 1 per enhancement & 10,125 measurements \\
+\hline
+\textbf{Total Unique Combinations} & \multicolumn{2}{|l|}{3,375 parameter sets} \\
+\hline
+\end{tabular}
+\end{table}
+
+The statistical validation framework ensures data integrity and experimental reproducibility through comprehensive validation and quality assurance protocols. To ensure reliable results, the framework implements multiple layers of data integrity checking, starting with feature value range validation, which confirms that mean values are within a $[-50, 50]~\text{dB}$ range, variance is non-negative with an upper bound of $100~\text{dB}^2$, percentile ordering is consistent ($Q_1 \le \text{Median} \le Q_3$), and statistical feature correlations are checked to detect errors. The framework also performs distance matrix validation to ensure symmetry ($d_{ij} = d_{ji}$), non-negativity ($d_{ij} \ge 0$), and a zero diagonal ($d_{ii} = 0$), alongside spot-checking the triangle inequality. Finally, clustering validation confirms the generation of exactly two clusters for binary classification, checks for cluster balance to prevent degenerate solutions, validates the convergence of iterative algorithms, and ensures label consistency across enhancement algorithms.
+

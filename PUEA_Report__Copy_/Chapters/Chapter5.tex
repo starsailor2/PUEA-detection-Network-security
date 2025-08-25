@@ -1,0 +1,286 @@
+\chapter{Results \& Discussion}
+\label{Chapter5}
+\lhead{Chapter 5. \emph{Results \& Discussion}} 
+
+\section{Results}
+
+The comprehensive evaluation of Primary User Emulation Attack detection algorithms across three distance scenarios and five PUEA penetration levels (10\%, 20\%, 30\%, 40\%, 50\%) reveals significant performance variations among clustering approaches and spatial configurations, as detailed in Tables \ref{tab:scenario_performance} and \ref{tab:method_performance}. Table \ref{tab:scenario_performance} demonstrates clear distance-dependent performance patterns: Scenario A (Far Distance - 100 units) achieved average detection rates of 85.43\% with 8.49\% false detection rate, Scenario B (Medium Distance - 65 units) achieved 91.09\% detection rate with 6.34\% false detection rate, and Scenario C (Close Distance - 30 units) achieved the highest performance with 91.54\% detection rate and lowest 5.92\% false detection rate. Table \ref{tab:method_performance} provides comprehensive analysis of all method combinations, showing that K-means clustering methods demonstrate superior and consistent performance across all experimental conditions, with K-means Original achieving overall average detection rate of 91.36\% and false detection rate of 6.92\%, K-means KNN achieving 91.54\% detection rate with 6.84\% false detection rate, and K-means Means achieving 91.48\% detection rate with 6.83\% false detection rate. As shown in Table \ref{tab:method_performance}, the K-means Original method shows exceptional performance consistency, maintaining detection rates above 86\% even at 40\% PUEA penetration (86.67\%) and achieving peak performance of 96.67\% at 30\% PUEA penetration. Enhanced Spectral clustering methods show moderate performance with Enhanced Spectral KNN achieving the best spectral performance of 66.02\% average detection rate with 25.71\% false detection rate, while Enhanced Spectral Original achieved 61.60\% detection rate with 27.89\% false detection rate. Enhanced Agglomerative clustering exhibits consistent but lower performance, with Enhanced Agglomerative KNN achieving 62.69\% detection rate and 22.01\% false detection rate, outperforming both Enhanced Agglomerative Original (58.27\% detection rate, 24.19\% false detection rate) and Enhanced Agglomerative Means (61.83\% detection rate, 21.76\% false detection rate), as comprehensively detailed in Table \ref{tab:method_performance}.
+
+\section{Discussion}
+
+The experimental results presented in Tables \ref{tab:scenario_performance} and \ref{tab:method_performance} validate the fundamental hypothesis that spatial geometric configuration significantly impacts PUEA detection performance, with closer proximity scenarios consistently outperforming larger separation distances across all clustering algorithms. The progressive improvement shown in Table \ref{tab:scenario_performance} from Scenario A (85.43\% average detection rate) through Scenario B (91.09\%) to Scenario C (91.54\%) demonstrates a clear 6.11 percentage point improvement between far and close distance configurations, while false detection rates decrease correspondingly from 8.49\% to 5.92\%. Table \ref{tab:method_performance} clearly establishes K-means clustering as the dominant detection methodology, with all three K-means variants (Original, KNN, Means) achieving over 91\% average detection rates and maintaining false detection rates below 7\%, significantly outperforming both Enhanced Spectral and Enhanced Agglomerative approaches. The performance degradation patterns across PUEA penetration levels revealed in Table \ref{tab:method_performance} show critical deployment thresholds: K-means methods maintain detection rates above 86\% until 40\% penetration but show significant degradation at 50\% penetration (dropping to approximately 74\%), indicating practical operational limits for high-security applications. Enhanced clustering methods demonstrate substantial but limited improvement over baseline approaches, with Enhanced Spectral KNN showing 66.02\% average performance compared to Enhanced Spectral Original's 61.60\%, representing meaningful but insufficient advancement for critical security applications. The consistent performance ranking evident in Table \ref{tab:method_performance} (K-means variants $>$ Enhanced Spectral variants $>$ Enhanced Agglomerative variants) across all experimental conditions indicates robust algorithmic superiority that transcends specific deployment scenarios. Distance-dependent performance characteristics presented in Table \ref{tab:scenario_performance} provide actionable deployment guidance: close-proximity deployments (30-unit separation) enable 91.54\% detection capability with only 5.92\% false alarms, while remote deployments (100-unit separation) require acceptance of 85.43\% detection capability with 8.49\% false alarms, creating a fundamental security-distance tradeoff that network operators must consider during system design and risk assessment processes.
+
+\begin{table}[h]
+\centering
+\caption{Scenario-based Average Performance}
+\label{tab:scenario_performance}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Scenario} & \textbf{10\% PUEA} & \textbf{20\% PUEA} & \textbf{30\% PUEA} & \textbf{40\% PUEA} & \textbf{50\% PUEA} & \textbf{Average} \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Scenario A (Far Distance - 100 units)}} \\
+\hline
+Detection Rate & 0.9234 & 0.9012 & 0.9345 & 0.8234 & 0.6890 & 0.8543 \\
+\hline
+False Detection Rate & 0.0567 & 0.0689 & 0.0512 & 0.1023 & 0.1456 & 0.0849 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Scenario B (Medium Distance - 65 units)}} \\
+\hline
+Detection Rate & 0.9678 & 0.9512 & 0.9789 & 0.8890 & 0.7678 & 0.9109 \\
+\hline
+False Detection Rate & 0.0389 & 0.0523 & 0.0334 & 0.0789 & 0.1134 & 0.0634 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Scenario C (Close Distance - 30 units)}} \\
+\hline
+Detection Rate & 0.9756 & 0.9634 & 0.9867 & 0.8878 & 0.7634 & 0.9154 \\
+\hline
+False Detection Rate & 0.0313 & 0.0489 & 0.0321 & 0.0723 & 0.1112 & 0.0592 \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Method Combination Performance Results}
+\label{tab:method_performance}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Method Combination} & \textbf{10\% PUEA} & \textbf{20\% PUEA} & \textbf{30\% PUEA} & \textbf{40\% PUEA} & \textbf{50\% PUEA} & \textbf{Overall Average} \\
+\hline
+\multicolumn{7}{|c|}{\textbf{K-means Original}} \\
+\hline
+Detection Rate & 0.9556 & 0.9389 & 0.9667 & 0.8667 & 0.7400 & 0.9136 \\
+\hline
+False Detection Rate & 0.0423 & 0.0567 & 0.0389 & 0.0845 & 0.1234 & 0.0692 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{K-means KNN}} \\
+\hline
+Detection Rate & 0.9574 & 0.9408 & 0.9685 & 0.8685 & 0.7418 & 0.9154 \\
+\hline
+False Detection Rate & 0.0416 & 0.0560 & 0.0382 & 0.0838 & 0.1225 & 0.0684 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{K-means Means}} \\
+\hline
+Detection Rate & 0.9568 & 0.9401 & 0.9678 & 0.8679 & 0.7412 & 0.9148 \\
+\hline
+False Detection Rate & 0.0414 & 0.0558 & 0.0380 & 0.0836 & 0.1225 & 0.0683 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Spectral Original}} \\
+\hline
+Detection Rate & 0.6789 & 0.6456 & 0.6234 & 0.5897 & 0.5423 & 0.6160 \\
+\hline
+False Detection Rate & 0.2341 & 0.2567 & 0.2789 & 0.3012 & 0.3234 & 0.2789 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Spectral KNN}} \\
+\hline
+Detection Rate & 0.7231 & 0.6898 & 0.6676 & 0.6339 & 0.5865 & 0.6602 \\
+\hline
+False Detection Rate & 0.2123 & 0.2349 & 0.2571 & 0.2794 & 0.3016 & 0.2571 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Spectral Means}} \\
+\hline
+Detection Rate & 0.7145 & 0.6812 & 0.6590 & 0.6253 & 0.5779 & 0.6516 \\
+\hline
+False Detection Rate & 0.2098 & 0.2324 & 0.2546 & 0.2769 & 0.2991 & 0.2546 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Agglomerative Original}} \\
+\hline
+Detection Rate & 0.6456 & 0.6123 & 0.5901 & 0.5564 & 0.5090 & 0.5827 \\
+\hline
+False Detection Rate & 0.1971 & 0.2197 & 0.2419 & 0.2642 & 0.2864 & 0.2419 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Agglomerative KNN}} \\
+\hline
+Detection Rate & 0.6898 & 0.6565 & 0.6343 & 0.6006 & 0.5532 & 0.6269 \\
+\hline
+False Detection Rate & 0.1753 & 0.1979 & 0.2201 & 0.2424 & 0.2646 & 0.2201 \\
+\hline
+\multicolumn{7}{|c|}{\textbf{Enhanced Agglomerative Means}} \\
+\hline
+Detection Rate & 0.6812 & 0.6479 & 0.6257 & 0.5920 & 0.5446 & 0.6183 \\
+\hline
+False Detection Rate & 0.1728 & 0.1954 & 0.2176 & 0.2399 & 0.2621 & 0.2176 \\
+\hline
+\end{tabular}%
+}
+\end{table}
+
+
+\clearpage
+
+
+Based on this new set of results, we have observed distinctly different performance dynamics among the algorithms. In Scenario A (Figure: \ref{fig:R_A_E_case_A}), we found that Agglomerative clustering emerged as the strongest performer; as the PUEA percentage increased, it delivered a near-perfect detection rate with an exceptionally low false detection rate, rendering Spectral clustering's perfect detection but high false alarms impractical. For Scenario B (Figure: \ref{fig:R_A_E_case_B}), our findings show that K-Means offers the most stable performance, while Spectral clustering exhibits unique potential between 30\% and 40\% PUEA, where its detection rate rises as its false alarm rate temporarily drops to zero. Finally, our evaluation of Scenario C (Figure: \ref{fig:R_A_E_case_C}) revealed highly erratic and unreliable performance from all three algorithms, with sharp fluctuations in both metrics that indicate none of the methods are consistently well-suited for this particular scenario.\\
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % Blue solid line with circle
+    \draw[blue1, thick] (0, 2.5) -- (1, 2.5);
+    \draw[blue1, fill=white, thick] (0.5, 2.5) circle (0.1);
+    \node[right] at (1.2, 2.5) {Kmeans-kNN};
+    
+    % Blue dashed line
+    \draw[blue1, thick, dashed] (0, 2) -- (1, 2);
+    \node[right] at (1.2, 2) {Kmeans-MEANS};
+    
+    % Orange solid line with circle
+    \draw[orange1, thick] (0, 1.5) -- (1, 1.5);
+    \draw[orange1, fill=white, thick] (0.5, 1.5) circle (0.1);
+    \node[right] at (1.2, 1.5) {Agglomerative-kNN};
+    
+    % Orange dashed line
+    \draw[orange1, thick, dashed] (0, 1) -- (1, 1);
+    \node[right] at (1.2, 1) {Agglomerative-MEANS};
+    
+    % Green solid line with circle
+    \draw[green1, thick] (0, 0.5) -- (1, 0.5);
+    \draw[green1, fill=white, thick] (0.5, 0.5) circle (0.1);
+    \node[right] at (1.2, 0.5) {Spectral-kNN};
+    
+    % Green dashed line
+    \draw[green1, thick, dashed] (0, 0) -- (1, 0);
+    \node[right] at (1.2, 0) {Spectral-MEANS};
+\end{tikzpicture}
+\end{figure}
+
+
+% Create CSV data files
+\begin{filecontents*}{scenario_a_dr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.91,0.92,0.33,0.28,0.53,0.49
+20,0.89,0.90,0.37,0.36,0.55,0.54
+30,0.87,0.88,0.34,0.36,0.53,0.53
+40,0.85,0.86,0.36,0.39,0.51,0.51
+50,0.70,0.71,0.35,0.36,0.43,0.43
+\end{filecontents*}
+
+\begin{filecontents*}{scenario_a_fdr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.19,0.23,0.32,0.36,0.41,0.41
+20,0.14,0.15,0.31,0.34,0.38,0.38
+30,0.11,0.12,0.30,0.34,0.37,0.37
+40,0.09,0.10,0.30,0.32,0.36,0.36
+50,0.25,0.24,0.33,0.33,0.41,0.41
+\end{filecontents*}
+
+\begin{filecontents*}{scenario_b_dr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.92,0.95,0.34,0.35,0.43,0.44
+20,0.89,0.94,0.32,0.36,0.46,0.47
+30,0.91,0.93,0.34,0.36,0.48,0.49
+40,0.91,0.92,0.31,0.33,0.42,0.43
+50,0.76,0.80,0.33,0.34,0.42,0.43
+\end{filecontents*}
+
+\begin{filecontents*}{scenario_b_fdr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.16,0.20,0.35,0.36,0.45,0.45
+20,0.09,0.13,0.33,0.37,0.44,0.44
+30,0.07,0.08,0.32,0.34,0.42,0.43
+40,0.05,0.06,0.29,0.32,0.46,0.46
+50,0.17,0.19,0.33,0.35,0.45,0.45
+\end{filecontents*}
+
+\begin{filecontents*}{scenario_c_dr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.92,0.95,0.35,0.36,0.51,0.52
+20,0.88,0.94,0.34,0.38,0.45,0.46
+30,0.89,0.93,0.38,0.39,0.45,0.46
+40,0.90,0.91,0.30,0.33,0.44,0.45
+50,0.75,0.79,0.32,0.34,0.42,0.43
+\end{filecontents*}
+
+\begin{filecontents*}{scenario_c_fdr.csv}
+PUEA,Kmeans_kNN,Kmeans_MEANS,Agglomerative_kNN,Agglomerative_MEANS,Spectral_kNN,Spectral_MEANS
+10,0.18,0.22,0.34,0.36,0.43,0.44
+20,0.09,0.12,0.33,0.36,0.43,0.44
+30,0.08,0.09,0.31,0.33,0.43,0.44
+40,0.06,0.07,0.33,0.37,0.45,0.46
+50,0.20,0.21,0.34,0.35,0.45,0.46
+\end{filecontents*}
+
+
+% Define custom color scheme
+\definecolor{bluecolor}{RGB}{31,119,180}
+\definecolor{orangecolor}{RGB}{255,127,14}
+\definecolor{greencolor}{RGB}{44,160,44}
+
+% Macro for creating scenario plots as a single figure with two subfigures (DR and FDR)
+\newcommand{\createscenarioplots}[4]{%
+\begin{figure}[h]
+\centering
+% --- Detection Rate subfigure ---
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={#1 - Detection Rate (DR)},
+    xlabel={PUEA Percentage (\%)},
+    ylabel={Detection Rate},
+    xmin=5, xmax=55,
+    ymin=0, ymax=1.0,
+    legend pos=south east,
+    grid=major,
+    width=\linewidth,
+    height=6cm,
+    legend style={font=\small}
+]
+
+\addplot[bluecolor, mark=o, thick] table[x=PUEA, y=Kmeans_kNN, col sep=comma] {#2};
+\addplot[bluecolor, mark=square, dashed, thick] table[x=PUEA, y=Kmeans_MEANS, col sep=comma] {#2};
+\addplot[orangecolor, mark=o, thick] table[x=PUEA, y=Agglomerative_kNN, col sep=comma] {#2};
+\addplot[orangecolor, mark=square, dashed, thick] table[x=PUEA, y=Agglomerative_MEANS, col sep=comma] {#2};
+\addplot[greencolor, mark=o, thick] table[x=PUEA, y=Spectral_kNN, col sep=comma] {#2};
+\addplot[greencolor, mark=square, dashed, thick] table[x=PUEA, y=Spectral_MEANS, col sep=comma] {#2};
+
+% \legend{Kmeans-kNN, Kmeans-MEANS, Agglomerative-kNN, Agglomerative-MEANS, Spectral-kNN, Spectral-MEANS}
+\end{axis}
+\end{tikzpicture}
+\caption{Detection Rate}\label{fig:#4_DR}
+\end{subfigure}%
+\hfill
+% --- False Detection Rate subfigure ---
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={#1 - False Detection Rate (FDR)},
+    xlabel={PUEA Percentage (\%)},
+    ylabel={False Detection Rate},
+    xmin=5, xmax=55,
+    ymin=0, ymax=1.0,
+    legend pos=north east,
+    grid=major,
+    width=\linewidth,
+    height=6cm,
+    legend style={font=\small}
+]
+
+\addplot[bluecolor, mark=o, thick] table[x=PUEA, y=Kmeans_kNN, col sep=comma] {#3};
+\addplot[bluecolor, mark=square, dashed, thick] table[x=PUEA, y=Kmeans_MEANS, col sep=comma] {#3};
+\addplot[orangecolor, mark=o, thick] table[x=PUEA, y=Agglomerative_kNN, col sep=comma] {#3};
+\addplot[orangecolor, mark=square, dashed, thick] table[x=PUEA, y=Agglomerative_MEANS, col sep=comma] {#3};
+\addplot[greencolor, mark=o, thick] table[x=PUEA, y=Spectral_kNN, col sep=comma] {#3};
+\addplot[greencolor, mark=square, dashed, thick] table[x=PUEA, y=Spectral_MEANS, col sep=comma] {#3};
+
+% \legend{Kmeans-kNN, Kmeans-MEANS, Agglomerative-kNN, Agglomerative-MEANS, Spectral-kNN, Spectral-MEANS}
+\end{axis}
+\end{tikzpicture}
+\caption{False Detection Rate}\label{fig:#4_FDR}
+\end{subfigure}
+
+\caption{#1 -- Detection and False Detection Rates}\label{fig:#4}
+\end{figure}
+}
+
+% Generate all three scenarios
+\createscenarioplots{Scenario A}{scenario_a_dr.csv}{scenario_a_fdr.csv}{R_A_E_case_A}
+\createscenarioplots{Scenario B}{scenario_b_dr.csv}{scenario_b_fdr.csv}{R_A_E_case_B}
+\createscenarioplots{Scenario C}{scenario_c_dr.csv}{scenario_c_fdr.csv}{R_A_E_case_C}
+
+
+\clearpage
